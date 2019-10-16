@@ -12542,11 +12542,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\DocsManager\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj",
       "projectName": "DocsFileManagerMVC",
-      "projectPath": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\DocsManager\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\DocsFileManagerMVC\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\DocsManager\\DocsFileManagerMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",

@@ -15,14 +15,14 @@ namespace DocsFileManagerMVC.Controllers
 
         public IActionResult Index()
         {
-            return View("Default", docsModel);
+            return View("Default", docsModel.GetElementsInFolder());
         }
 
         [HttpPost("DeleteFile")]
-        public async Task<IActionResult> Delete(int id, string relativeFolderPath)
+        public async Task<IActionResult> Delete(IObjInDir obj)
         {
-            await Task.Run( () => { docsModel.Remove(docsModel.allFiles[id]); });
-            return View("Default", new DocsModel(docsModel.folderPath + relativeFolderPath + "\\"));
+            await Task.Run( () => { obj.Delete(); });
+            return View("Default", docsModel.GetElementsInFolder(obj.RelativeFolderPath));
         }
 
         [HttpPost("UploadFiles")]
@@ -33,27 +33,34 @@ namespace DocsFileManagerMVC.Controllers
                 if (formFile.FileName.Split('.').Last() == "doc" || formFile.FileName.Split('.').Last() == "xls")
                 {
 
-                    await docsModel.UploadFile(formFile, (relativeFolderPath == "" ? "" : relativeFolderPath + "\\"));
+                    await docsModel.UploadFile(formFile, relativeFolderPath);
                 }
             }
-            return View("Default", new DocsModel(docsModel.folderPath + relativeFolderPath + "\\"));// Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
+            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
         }
 
-        public IActionResult GetFile(int id)
+        public IActionResult GetFile(string fileName, string relativeFolderPath = "")
         {
-            if (id < docsModel.allFiles.Count)
+            if (fileName != "")
             {
-                string filePath = docsModel.allFiles[id].Path;
-                string fileType = "application/" + docsModel.allFiles[id].Extention;
-                string fileName = docsModel.allFiles[id].Name + "." + docsModel.allFiles[id].Extention;
-                return PhysicalFile(filePath, fileType, fileName);
+                var file = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
+                            where (f.Name == fileName && f.RelativeFolderPath == relativeFolderPath)
+                            select f).FirstOrDefault() as DocFile;
+
+                if (file != null)
+                {
+                    string filePath = file.Path;
+                    string fileType = "application/" + file.Extention;
+                    string fileName2 = file.Name + "." + file.Extention;
+                    return PhysicalFile(filePath, fileType, fileName2);
+                }
             }
-            return View("Default", docsModel); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
-        }
+            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
+        } //разобраться почему: если в начальной папке нет файла, то он грузит не в выбранную папку, а в начальную
 
         public IActionResult ViewFolder(string relativeFolderPath)
         {
-            return View("Default", new DocsModel(docsModel.folderPath + relativeFolderPath + "\\", docsModel.allFiles));
+            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath));
         }
     }
 }

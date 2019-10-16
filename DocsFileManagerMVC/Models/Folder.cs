@@ -10,7 +10,7 @@ namespace DocsFileManagerMVC.Models
     {
         public string Name { get; private set; }
         public string Path { get; private set; }
-        public string RelativePath { get; private set; }
+        public string RelativeFolderPath { get; private set; }
         public string Extention => throw new NotImplementedException();
         public string Description { get; private set; }
 
@@ -22,7 +22,7 @@ namespace DocsFileManagerMVC.Models
         public Folder(string path, string description = "")
         {
             Path = path;
-            RelativePath = path.Split("Files\\").Last();
+            RelativeFolderPath = path.Split("Files\\").Last();
             Name = path.Split('\\').Last();
             Description = description;
         }

@@ -8,10 +8,11 @@ namespace DocsFileManagerMVC.Models
 {
     public class DocFile : IObjInDir
     {
-        public string Name { get; set; }
-        public string Extention { get; set; }
-        public string Path { get; set; }
-        public string Description { get; set; }
+        public string Name { get; private set; }
+        public string Extention { get; private set; }
+        public string Path { get; private set; }
+        public string Description { get; private set; }
+        public string RelativeFolderPath { get; private set; }
 
         public void Delete()
         {
@@ -31,6 +32,7 @@ namespace DocsFileManagerMVC.Models
             Path = path;
             Name = path.Split('\\').Last().Split('.')[0];
             Extention = path.Split('\\').Last().Split('.')[1];
+            RelativeFolderPath = path.Split("Files\\").Last() == Name + "." + Extention ? "" : path.Split("Files\\").Last().Replace(Name + "." + Extention, "");
             Description = description;
         }
 

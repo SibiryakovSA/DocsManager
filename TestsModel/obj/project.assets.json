@@ -7611,11 +7611,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\TestsModel\\TestsModel.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\DocsManager\\TestsModel\\TestsModel.csproj",
       "projectName": "TestsModel",
-      "projectPath": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\TestsModel\\TestsModel.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\DocsManager\\TestsModel\\TestsModel.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\TestsModel\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\DocsManager\\TestsModel\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -7636,8 +7636,8 @@
       "frameworks": {
         "netcoreapp3.0": {
           "projectReferences": {
-            "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\DocsFileManagerMVC\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj"
+            "C:\\Users\\User\\source\\repos\\DocsManager\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\DocsManager\\DocsFileManagerMVC\\DocsFileManagerMVC.csproj"
             }
           }
         }

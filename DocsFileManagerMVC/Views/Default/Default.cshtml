@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model DocsModel
+@model List<IObjInDir>
 
 <!DOCTYPE html>
 
@@ -17,39 +17,34 @@
     </header>
 
     <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-        <div class="form-group">
             <input type="hidden" value="@Context.Request.Query["relativeFolderPath"].ToString()" name="relativeFolderPath"/>
             <input type="file" accept=".doc, .xls" name="files" multiple>
-        </div>
-        <div class="form-group">
-                <input type="submit" value="Загрузить">
-        </div>
+            <input type="submit" value="Загрузить">
     </form>
 
-    <h3>Все файлы</h3>
-    <h2>Количество файлов: @Model.docFiles.Count</h2>
-    @foreach (var f in Model.docFiles)
+    <h3>Все элементы</h3>
+    <h2>Количество элементов в папке: @Model.Count</h2>
+    @foreach (var elem in Model)
     {
         <div class="item">
-            @if (f is DocFile)
-            {
+           @if (elem is DocFile)
+           {
                 <form method="post" enctype="multipart/form-data" asp-controller="DeleteFile" asp-action="Index">
-                    <input type="hidden" value="@Model.GetFileIdInAllFiles(f as DocFile)" name="id" />
+                    <input type="hidden" value="@elem" name="obj" />
                     <input type="hidden" value="@Context.Request.Query["relativeFolderPath"].ToString()" name="relativeFolderPath" />
                     <input type="submit" value="X" />
                 </form>
 
-                <img src="~/images/@(f.Extention + ".png")"/>
-                <p>@String.Format("{0}.{1}", f.Name, f.Extention)</p>
-                <p><a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/GetFile?id=" + Model.GetFileIdInAllFiles(f as DocFile))">Загрузить</a></p>
-                            }
-            else if (f is Folder)
+                <img src="~/images/@(elem.Extention + ".png")"/>
+                <p>@String.Format("{0}.{1}", elem.Name, elem.Extention)</p>
+                <p><a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/GetFile?fileName=" + elem.Name + (elem.RelativeFolderPath != "" ? "&relativeFolderPath=" + elem.RelativeFolderPath : ""))">Загрузить</a></p>
+            }
+            else if (elem is Folder)
             {
-                <a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + (f as Folder).RelativePath)"> <img src="~/images/folder.png"/> </a> 
-                <p>@f.Name</p>
+                <a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + (elem as Folder).RelativeFolderPath + "\\")"> <img src="~/images/folder.png"/> </a> 
+                <p>@elem.Name</p>
             }
         </div>
      }
-    <h1>@Context.Request.Query["relativeFolderPath"].ToString()</h1>
 </body>
 </html>
