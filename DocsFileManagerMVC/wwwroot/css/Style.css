@@ -29,5 +29,31 @@ body {
 
 .item img{
     resize: both;
-    
 }
+
+/*.item:hover{
+    background-color:black;
+}*/
+
+.item input{
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    top: 19%;
+    left: 86%;
+}
+
+.blackDescription {
+    left: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+}
+
+    .blackDescription:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }

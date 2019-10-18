@@ -11,18 +11,41 @@ namespace DocsFileManagerMVC.Controllers
 {
     public class DefaultController : Controller
     {
-        DocsModel docsModel = new DocsModel(@"C:\Users\User\source\repos\DocsFileManagerMVC\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\Files\");
+        DocsModel docsModel = new DocsModel(@"C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\Files\");
 
         public IActionResult Index()
         {
             return View("Default", docsModel.GetElementsInFolder());
         }
 
-        [HttpPost("DeleteFile")]
-        public async Task<IActionResult> Delete(IObjInDir obj)
+
+        [HttpPost("CreateFolder")]
+        public IActionResult CreateFolder(string folderName, string relativeFolderPath = "")
         {
-            await Task.Run( () => { obj.Delete(); });
-            return View("Default", docsModel.GetElementsInFolder(obj.RelativeFolderPath));
+            Directory.CreateDirectory(docsModel.folderPath + relativeFolderPath + folderName);
+
+            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
+        }
+
+        [HttpPost("DeleteFile")]
+        public async Task<IActionResult> Delete(string fileNameExtention, string relativeFolderPath = "")
+        {
+            if (fileNameExtention != "")
+            {
+                var obj = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
+                           where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == relativeFolderPath)
+                           select f).FirstOrDefault();
+
+                if (obj != null)
+                {
+                    await Task.Run(() => { obj.Delete(); });
+                    //return View("Default", docsModel.GetElementsInFolder(obj.RelativeFolderPath));
+                }
+            }
+            //return View("Default", docsModel.GetElementsInFolder());
+            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
         }
 
         [HttpPost("UploadFiles")]
@@ -36,15 +59,16 @@ namespace DocsFileManagerMVC.Controllers
                     await docsModel.UploadFile(formFile, relativeFolderPath);
                 }
             }
-            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
-        }
+            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host)); //View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
+        } //проблема в редиректе кириллицы (в загрузке файлов в папку с русскими символами)
 
-        public IActionResult GetFile(string fileName, string relativeFolderPath = "")
+        public IActionResult GetFile(string fileNameExtention, string relativeFolderPath = "")
         {
-            if (fileName != "")
+            if (fileNameExtention != "")
             {
                 var file = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
-                            where (f.Name == fileName && f.RelativeFolderPath == relativeFolderPath)
+                            where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == relativeFolderPath)
                             select f).FirstOrDefault() as DocFile;
 
                 if (file != null)
@@ -56,7 +80,7 @@ namespace DocsFileManagerMVC.Controllers
                 }
             }
             return View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
-        } //разобраться почему: если в начальной папке нет файла, то он грузит не в выбранную папку, а в начальную
+        }
 
         public IActionResult ViewFolder(string relativeFolderPath)
         {

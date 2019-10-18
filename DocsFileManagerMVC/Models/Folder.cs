@@ -11,7 +11,7 @@ namespace DocsFileManagerMVC.Models
         public string Name { get; private set; }
         public string Path { get; private set; }
         public string RelativeFolderPath { get; private set; }
-        public string Extention => throw new NotImplementedException();
+        public string Extention => "";
         public string Description { get; private set; }
 
         public void Delete()
@@ -22,8 +22,8 @@ namespace DocsFileManagerMVC.Models
         public Folder(string path, string description = "")
         {
             Path = path;
-            RelativeFolderPath = path.Split("Files\\").Last();
             Name = path.Split('\\').Last();
+            RelativeFolderPath = path.Split("Files\\").Last().Replace(Name, ""); //перепиши через indexOf, то же для DocFile
             Description = description;
         }
     }

@@ -11,6 +11,7 @@ namespace DocsFileManagerMVC.Models
         string Path { get; }
         string Extention { get; }
         string RelativeFolderPath { get; }
+        string Description { get; }
         void Delete();
     }
 }
