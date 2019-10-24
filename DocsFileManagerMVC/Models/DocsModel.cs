@@ -18,10 +18,11 @@ namespace DocsFileManagerMVC.Models
             this.folderPath = folderPath;
         }
 
-        public async Task UploadFile(IFormFile file, string relativeFolderPath)
+        public async Task UploadFile(IFormFile file, string relativeFolderPath, string description = "")
         {
             using (var stream = new FileStream(folderPath + relativeFolderPath + file.FileName, FileMode.Create))
             {
+                File.WriteAllText(folderPath + relativeFolderPath + file.FileName.Remove(file.FileName.LastIndexOf('.')) + file.FileName.Split('.').Last() + ".descr", description);
                 await file.CopyToAsync(stream);
             }
         }
@@ -35,13 +36,28 @@ namespace DocsFileManagerMVC.Models
             foreach (var folderPath in folders)
             {
                 var folder = new Folder(folderPath);
+                var descrList = Directory.GetFiles(folder.Path.Remove(folder.Path.LastIndexOf(folder.Name)), folder.Name + ".descr");
+                if (descrList.Length == 1)
+                {
+                    var descr = File.ReadAllText(descrList[0]);
+                    folder.SetDescription(descr);
+                }
                 list.Add(folder);
             }
 
             foreach (var filePath in files)
             {
                 var file = new DocFile(filePath);
-                list.Add(file);
+                if (file.Extention == "doc" || file.Extention == "xls")
+                {
+                    var descrList = Directory.GetFiles(file.Path.Remove(file.Path.LastIndexOf(file.Name + "." + file.Extention)), file.Name + file.Extention + ".descr");
+                    if (descrList.Length == 1)
+                    {
+                        var descr = File.ReadAllText(descrList[0]);
+                        file.SetDescription(descr);
+                    }
+                    list.Add(file);
+                }
             }
 
             return list;

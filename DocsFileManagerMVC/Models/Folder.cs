@@ -17,13 +17,20 @@ namespace DocsFileManagerMVC.Models
         public void Delete()
         {
             Directory.Delete(Path, true);
+            File.Delete(Path + ".descr");
         }
 
         public Folder(string path, string description = "")
         {
             Path = path;
             Name = path.Split('\\').Last();
-            RelativeFolderPath = path.Split("Files\\").Last().Replace(Name, ""); //перепиши через indexOf, то же для DocFile
+            RelativeFolderPath = path.Split("Files\\").Last();
+            RelativeFolderPath = RelativeFolderPath.Remove(RelativeFolderPath.LastIndexOf(Name));
+            Description = description;
+        }
+
+        public void SetDescription(string description)
+        {
             Description = description;
         }
     }

@@ -17,6 +17,7 @@ namespace DocsFileManagerMVC.Models
         public void Delete()
         {
             File.Delete(Path);
+            File.Delete(Path.Remove(Path.LastIndexOf("." + Extention)) + Extention + ".descr");
         }
 
         public DocFile(string name, string extention, string  description = "")
@@ -32,7 +33,8 @@ namespace DocsFileManagerMVC.Models
             Path = path;
             Name = path.Split('\\').Last().Split('.')[0];
             Extention = path.Split('\\').Last().Split('.')[1];
-            RelativeFolderPath = path.Split("Files\\").Last() == Name + "." + Extention ? "" : path.Split("Files\\").Last().Replace(Name + "." + Extention, "");
+            RelativeFolderPath = path.Split("Files\\").Last();
+            RelativeFolderPath = RelativeFolderPath.Remove(RelativeFolderPath.LastIndexOf(Name + "." + Extention));
             Description = description;
         }
 
@@ -41,6 +43,11 @@ namespace DocsFileManagerMVC.Models
             Name = name;
             Extention = extention;
             Path = path;
+            Description = description;
+        }
+
+        public void SetDescription(string description)
+        {
             Description = description;
         }
     }

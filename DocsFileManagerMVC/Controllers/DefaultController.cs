@@ -20,21 +20,23 @@ namespace DocsFileManagerMVC.Controllers
 
 
         [HttpPost("CreateFolder")]
-        public IActionResult CreateFolder(string folderName, string relativeFolderPath = "")
+        public IActionResult CreateFolder(string folderName, string relativeFolderPath = "", string description = "")
         {
-            Directory.CreateDirectory(docsModel.folderPath + relativeFolderPath + folderName);
-
-            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            var rfp = relativeFolderPath == "" ? "" : Uri.UnescapeDataString(relativeFolderPath);
+            Directory.CreateDirectory(docsModel.folderPath + rfp + folderName);
+            System.IO.File.WriteAllText(docsModel.folderPath + rfp + folderName + ".descr", description);
+            var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
             return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
         }
 
         [HttpPost("DeleteFile")]
         public async Task<IActionResult> Delete(string fileNameExtention, string relativeFolderPath = "")
         {
+            var rfp = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
             if (fileNameExtention != "")
             {
-                var obj = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
-                           where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == relativeFolderPath)
+                var obj = (from f in docsModel.GetElementsInFolder(rfp)
+                           where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == rfp)
                            select f).FirstOrDefault();
 
                 if (obj != null)
@@ -44,47 +46,47 @@ namespace DocsFileManagerMVC.Controllers
                 }
             }
             //return View("Default", docsModel.GetElementsInFolder());
-            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
             return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
         }
 
         [HttpPost("UploadFiles")]
-        public async Task<IActionResult> Post(List<IFormFile> files, string relativeFolderPath)
+        public async Task<IActionResult> Post(List<IFormFile> files, string relativeFolderPath, string description = "")
         {
             foreach (var formFile in files)
             {
                 if (formFile.FileName.Split('.').Last() == "doc" || formFile.FileName.Split('.').Last() == "xls")
                 {
-
-                    await docsModel.UploadFile(formFile, relativeFolderPath);
+                    await docsModel.UploadFile(formFile, relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath), description);
                 }
             }
             var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
             return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host)); //View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
-        } //проблема в редиректе кириллицы (в загрузке файлов в папку с русскими символами)
+        }
 
         public IActionResult GetFile(string fileNameExtention, string relativeFolderPath = "")
         {
+            var rfp = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
             if (fileNameExtention != "")
             {
-                var file = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
-                            where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == relativeFolderPath)
+                var file = (from f in docsModel.GetElementsInFolder(rfp)
+                            where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == rfp)
                             select f).FirstOrDefault() as DocFile;
 
                 if (file != null)
                 {
                     string filePath = file.Path;
                     string fileType = "application/" + file.Extention;
-                    string fileName2 = file.Name + "." + file.Extention;
-                    return PhysicalFile(filePath, fileType, fileName2);
+                    string fileName = file.Name + "." + file.Extention;
+                    return PhysicalFile(filePath, fileType, fileName);
                 }
             }
-            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
+            return View("Default", docsModel.GetElementsInFolder(rfp)); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
         }
 
         public IActionResult ViewFolder(string relativeFolderPath)
         {
-            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath));
+            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath)));
         }
     }
 }
