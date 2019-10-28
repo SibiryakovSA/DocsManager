@@ -68,3 +68,6 @@ C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\DocsFileManagerMVC.Views.pdb
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Debug\netcoreapp2.1\DocsFileManagerMVC.Views.pdb
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Debug\netcoreapp2.1\DocsFileManagerMVC.csproj.CopyComplete
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\libman.json
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\package.json
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Debug\netcoreapp2.1\Razor\Views\AllElementsPart.cshtml.g.cs

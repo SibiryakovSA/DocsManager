@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Http;
 
 namespace DocsFileManagerMVC.Models
@@ -16,6 +15,8 @@ namespace DocsFileManagerMVC.Models
         public DocsModel(string folderPath)
         {
             this.folderPath = folderPath;
+            Directory.CreateDirectory(folderPath.Substring(0, folderPath.Length - 1));
+
         }
 
         public async Task UploadFile(IFormFile file, string relativeFolderPath, string description = "")

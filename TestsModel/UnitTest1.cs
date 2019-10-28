@@ -25,9 +25,15 @@ namespace TestsModel
             //}
             //Assert.Pass();
 
-            var relativeFolderPath = "";
-            var folderName = "someName";
-            Directory.CreateDirectory(relativeFolderPath + folderName);
+            foreach (var file in docsModel.GetElementsInFolder())
+            {
+                Console.WriteLine(file.RelativeFolderPath);
+            }
+            Console.WriteLine("-------------------------------------");
+            foreach (var file in docsModel.GetElementsInFolder("gfg\\"))
+            {
+                file.Delete();
+            }
         }
     }
 }

@@ -1,0 +1,89 @@
+﻿@model List<IObjInDir>
+
+@{ 
+    var relativePath = TempData["relativeFolderPath"].ToString();
+    var relativePathSplited = relativePath.Split('\\');
+    TempData["relativeFolderPath"] = relativePath;
+    string currentLinq = "";
+}
+
+
+<div class="PathMap">
+    <div class="PathMapElement">
+        <a href="" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items" method="get"
+           data-ajax-url="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=")">
+            <img src="~/images/home.png" />
+        </a>
+    </div>
+    @for (int i = 0; i < relativePathSplited.Length - 2; i++)
+    {
+        currentLinq += relativePathSplited[i] + "\\";
+        <div class="PathMapElement">
+            <a href="" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items" method="get" 
+               data-ajax-url="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + Uri.EscapeDataString(currentLinq))">
+                <h2>@relativePathSplited[i]</h2>
+            </a>
+        </div>
+    }
+    @if(relativePathSplited.Length > 1)
+    {
+        <div class="PathMapElement">
+            <h2>@relativePathSplited[relativePathSplited.Count() - 2]</h2>
+        </div>
+    }
+</div>
+
+<h2>Количество элементов в папке: @Model.Count</h2>
+
+@foreach (var elem in Model)
+{
+    @if (elem is DocFile)
+    {
+        <div class="item">
+            <div class="blackDescription">
+                <p>@(elem.Description != "" ? elem.Description : "Описание отсутствует")</p>
+                <div class="icons">
+                    @*<a href="" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items" method="get" action="/Default/BookSearch">
+                            <img src="~/images/download.png" />
+                        </a>*@
+                    <a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/GetFile?fileNameExtention=" + elem.Name + "." + elem.Extention + (elem.RelativeFolderPath != "" ? "&relativeFolderPath=" + elem.RelativeFolderPath : ""))">
+                        <img src="~/images/download.png" />
+                    </a>
+                </div>
+                <div class="icons">
+                    <form method="post" asp-controller="DeleteFile" asp-action="Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items">
+                        <input type="hidden" value="@(elem.Name + "." + elem.Extention)" name="fileNameExtention" />
+                        @if (elem.RelativeFolderPath != "")
+                        {<input type="hidden" value="@Uri.EscapeDataString(Context.Request.Query["relativeFolderPath"].ToString())" name="relativeFolderPath" />}
+                        <button type="submit" onclick="return confirm('Вы точно хотите удалить файл?')"><img src="~/images/remove.png" /></button>
+                    </form>
+                </div>
+            </div>
+            <img src="~/images/@(elem.Extention + ".png")" />
+            <p>@String.Format("{0}.{1}", elem.Name, elem.Extention)</p>
+        </div>
+    }
+    else if (elem is Folder)
+    {
+        <a href="" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items" method="get" 
+           data-ajax-url="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + Uri.EscapeDataString(elem.RelativeFolderPath + elem.Name) + "\\")">
+
+            @*<a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + Uri.EscapeDataString(elem.RelativeFolderPath + elem.Name) + "\\")">*@
+            <div class="item">
+                <div class="blackDescription">
+                    <p>@(elem.Description != "" ? elem.Description : "Описание отсутствует")</p>
+                    <div class="icons">
+                        <form onclick="event.stopPropagation()" method="post" asp-controller="DeleteFile" asp-action="Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items">
+                            <input type="hidden" value="@(elem.Name + "." + elem.Extention)" name="fileNameExtention" />
+                            @if (elem.RelativeFolderPath != "")
+                            {<input type="hidden" value="@Uri.EscapeDataString(Context.Request.Query["relativeFolderPath"].ToString())" name="relativeFolderPath" />}
+                            <button type="submit" onclick="return confirm('Вы точно хотите удалить файл?')"><img src="~/images/remove.png" /></button>
+                        </form>
+                    </div>
+                </div>
+                <img src="~/images/folder.png" />
+                <p>@elem.Name</p>
+            </div>
+        </a>
+    }
+}

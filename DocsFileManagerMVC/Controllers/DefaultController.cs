@@ -11,10 +11,11 @@ namespace DocsFileManagerMVC.Controllers
 {
     public class DefaultController : Controller
     {
-        DocsModel docsModel = new DocsModel(@"C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Debug\netcoreapp2.1\Files\");
+        DocsModel docsModel = new DocsModel(AppContext.BaseDirectory + "Files\\");
 
         public IActionResult Index()
         {
+            TempData["relativeFolderPath"] = "";
             return View("Default", docsModel.GetElementsInFolder());
         }
 
@@ -22,52 +23,69 @@ namespace DocsFileManagerMVC.Controllers
         [HttpPost("CreateFolder")]
         public IActionResult CreateFolder(string folderName, string relativeFolderPath = "", string description = "")
         {
-            var rfp = relativeFolderPath == "" ? "" : Uri.UnescapeDataString(relativeFolderPath);
-            Directory.CreateDirectory(docsModel.folderPath + rfp + folderName);
-            System.IO.File.WriteAllText(docsModel.folderPath + rfp + folderName + ".descr", description);
-            var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
-            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
+            relativeFolderPath = TempData["relativeFolderPath"] == null ? "" : TempData["relativeFolderPath"].ToString();
+
+            //var rfp = relativeFolderPath == "" ? "" : Uri.UnescapeDataString(relativeFolderPath);
+            Directory.CreateDirectory(docsModel.folderPath + relativeFolderPath + folderName);
+            System.IO.File.WriteAllText(docsModel.folderPath + relativeFolderPath + folderName + ".descr", description);
+            //var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            //return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
+            TempData["relativeFolderPath"] = relativeFolderPath;
+            return PartialView("~/views/AllElementsPart.cshtml", docsModel.GetElementsInFolder(relativeFolderPath));
         }
 
         [HttpPost("DeleteFile")]
-        public async Task<IActionResult> Delete(string fileNameExtention, string relativeFolderPath = "")
+        public IActionResult Delete(string fileNameExtention, string relativeFolderPath)
         {
-            var rfp = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
+            relativeFolderPath = TempData["relativeFolderPath"] == null ? "" : TempData["relativeFolderPath"].ToString();
+            //var rfp = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
+
             if (fileNameExtention != "")
             {
-                var obj = (from f in docsModel.GetElementsInFolder(rfp)
-                           where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == rfp)
+                var obj = (from f in docsModel.GetElementsInFolder(relativeFolderPath)
+                           where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == relativeFolderPath)
                            select f).FirstOrDefault();
 
                 if (obj != null)
                 {
-                    await Task.Run(() => { obj.Delete(); });
+                    obj.Delete();
                     //return View("Default", docsModel.GetElementsInFolder(obj.RelativeFolderPath));
                 }
+                // Ok(new { file = obj.RelativeFolderPath + obj.Name, rfp = relativeFolderPath });
             }
+
             //return View("Default", docsModel.GetElementsInFolder());
-            var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
-            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
+
+            //var redirectRelativePath = rfp == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
+            //return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host));
+            //TempData["relativeFolderPath"] = relativeFolderPath;
+            //return PartialView("~/views/ttest.cshtml", docsModel.GetElementsInFolder(relativeFolderPath));
+            TempData["relativeFolderPath"] = relativeFolderPath;
+            return PartialView("~/views/AllElementsPart.cshtml", docsModel.GetElementsInFolder(relativeFolderPath));
         }
 
         [HttpPost("UploadFiles")]
-        public async Task<IActionResult> Post(List<IFormFile> files, string relativeFolderPath, string description = "")
+        public async Task<IActionResult> Post(List<IFormFile> files, string description = "")
         {
+            var relativeFolderPath = TempData["relativeFolderPath"] == null ? "" : TempData["relativeFolderPath"].ToString();
             foreach (var formFile in files)
             {
                 if (formFile.FileName.Split('.').Last() == "doc" || formFile.FileName.Split('.').Last() == "xls")
                 {
-                    await docsModel.UploadFile(formFile, relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath), description);
+                    await docsModel.UploadFile(formFile, relativeFolderPath == null ? "" : relativeFolderPath, description);
                 }
             }
-            var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + relativeFolderPath;
-            return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host)); //View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
+            TempData["relativeFolderPath"] = relativeFolderPath;
+            return PartialView("~/views/AllElementsPart.cshtml", docsModel.GetElementsInFolder(relativeFolderPath));
+            //var redirectRelativePath = relativeFolderPath == "" ? "" : "/default/ViewFolder?relativeFolderPath=" + Uri.EscapeDataString(relativeFolderPath);
+            //return Redirect(string.Format("{0}://{1}" + redirectRelativePath, Request.Scheme, Request.Host)); //View("Default", docsModel.GetElementsInFolder(relativeFolderPath)); // Ok(new { count = files.Count, path = docsModel.folderPath + relativeFolderPath });
         }
 
+        
         public IActionResult GetFile(string fileNameExtention, string relativeFolderPath = "")
         {
             var rfp = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
-            if (fileNameExtention != "")
+            if (fileNameExtention != "" && fileNameExtention != null)
             {
                 var file = (from f in docsModel.GetElementsInFolder(rfp)
                             where (f.Name + "." + f.Extention == fileNameExtention && f.RelativeFolderPath == rfp)
@@ -81,12 +99,14 @@ namespace DocsFileManagerMVC.Controllers
                     return PhysicalFile(filePath, fileType, fileName);
                 }
             }
-            return View("Default", docsModel.GetElementsInFolder(rfp)); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
+            return NotFound(); //View("Default", docsModel.GetElementsInFolder()); // Redirect(string.Format("{0}://{1}", Request.Scheme, Request.Host));
         }
 
         public IActionResult ViewFolder(string relativeFolderPath)
         {
-            return View("Default", docsModel.GetElementsInFolder(relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath)));
+            TempData["relativeFolderPath"] = relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath);
+            return PartialView("~/views/AllElementsPart.cshtml", docsModel.GetElementsInFolder(relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath)));
+            //return View("Default", docsModel.GetElementsInFolder(relativeFolderPath == null ? "" : Uri.UnescapeDataString(relativeFolderPath)));
         }
     }
 }

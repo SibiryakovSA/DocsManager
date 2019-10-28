@@ -89,6 +89,7 @@ p{
 a {
     text-decoration: none;
     outline: none;
+    color: black;
 }
 
 .item button {
@@ -145,4 +146,31 @@ a {
 
 .inputWithDescr h3{
     margin: 10px;
+}
+
+.PathMap {
+    width: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.PathMap .PathMapElement{
+    margin-left: 20px;
+    margin-right: 20px;
+    height:80px;
+    display:inline-block;
+    vertical-align:middle;
+}
+
+.PathMap .PathMapElement img{
+    resize:both;
+    height: 100%;
+}
+.PathMap .PathMapElement h2{
+    margin-top: 27px;
+    margin-bottom: 27px;
+}
+
+.PathMapElement a {
+    text-decoration: underline;
 }

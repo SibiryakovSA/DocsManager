@@ -238,3 +238,5 @@ C:\Users\User\source\repos\DocsManager\TestsModel\bin\Debug\netcoreapp3.0\zh-Han
 C:\Users\User\source\repos\DocsManager\TestsModel\bin\Debug\netcoreapp3.0\DocsFileManagerMVC.dll
 C:\Users\User\source\repos\DocsManager\TestsModel\bin\Debug\netcoreapp3.0\DocsFileManagerMVC.pdb
 C:\Users\User\source\repos\DocsManager\TestsModel\obj\Debug\netcoreapp3.0\TestsModel.csproj.CopyComplete
+C:\Users\User\source\repos\DocsManager\TestsModel\bin\Debug\netcoreapp3.0\libman.json
+C:\Users\User\source\repos\DocsManager\TestsModel\bin\Debug\netcoreapp3.0\package.json

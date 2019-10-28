@@ -8,8 +8,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width" />
-    <title>Default</title>
+    <title>Хранилище документов</title>
     <link rel="stylesheet" href="~/css/Style.css" />
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript">
+        var relFolderPath = '';
+    </script>
 </head>
 <body>
     <header>
@@ -17,7 +22,7 @@
     </header>
     <div class="inputWithDescr" id="first">
         <h3>Загрузка файлов</h3>
-        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+        <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items">
             <input type="hidden" value="@Uri.EscapeDataString(Context.Request.Query["relativeFolderPath"].ToString())" name="relativeFolderPath" />
             <h5>Выбор файлов</h5>
             <input type="file" accept=".doc, .xls" name="files" multiple>
@@ -28,7 +33,7 @@
     </div>
     <div class="inputWithDescr" id="second">
         <h3>Создание папок</h3>
-        <form method="post" enctype="multipart/form-data" asp-controller="CreateFolder" asp-action="Index">
+        <form method="post" enctype="multipart/form-data" asp-controller="CreateFolder" asp-action="Index" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#items">
             @if (@Context.Request.Query["relativeFolderPath"].ToString() != "")
             {
                 <input type="hidden" value="@Uri.EscapeDataString(Context.Request.Query["relativeFolderPath"].ToString())" name="relativeFolderPath" />
@@ -40,54 +45,9 @@
             <input type="submit" value="Создать папку">
         </form>
     </div>
-    <h2>Количество элементов в папке: @Model.Count</h2>
-
-    @foreach (var elem in Model)
-    {
-        @if (elem is DocFile)
-        {
-            <div class="item">
-                <div class="blackDescription">
-                    <p>@(elem.Description != "" ? elem.Description : "Описание отсутствует")</p>
-                    <div class="icons">
-                        <a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/GetFile?fileNameExtention=" + elem.Name + "." + elem.Extention + (elem.RelativeFolderPath != "" ? "&relativeFolderPath=" + elem.RelativeFolderPath : ""))">
-                            <img src="~/images/download.png" />
-                        </a>
-                    </div>
-                    <div class="icons">
-                        <form method="post" enctype="multipart/form-data" asp-controller="DeleteFile" asp-action="Index">
-                            <input type="hidden" value="@(elem.Name + "." + elem.Extention)" name="fileNameExtention" />
-                            @if (elem.RelativeFolderPath != "")
-                            {<input type="hidden" value="@Uri.EscapeDataString(Context.Request.Query["relativeFolderPath"].ToString())" name="relativeFolderPath" />}
-                            <button type="submit" onclick="return confirm('Вы точно хотите удалить файл?')"><img src="~/images/remove.png" /></button>
-                        </form>
-                    </div>
-                </div>
-                <img src="~/images/@(elem.Extention + ".png")" />
-                <p>@String.Format("{0}.{1}", elem.Name, elem.Extention)</p>
-            </div>
-        }
-        else if (elem is Folder)
-        {
-            <a href="@string.Format("{0}://{1}{2}", Context.Request.Scheme, Context.Request.Host, "/default/ViewFolder?relativeFolderPath=" + Uri.EscapeDataString(elem.RelativeFolderPath + elem.Name) + "\\")">
-                <div class="item">
-                    <div class="blackDescription">
-                        <p>@(elem.Description != "" ? elem.Description : "Описание отсутствует")</p>
-                        <div class="icons">
-                            <form method="post" enctype="multipart/form-data" asp-controller="DeleteFile" asp-action="Index">
-                                <input type="hidden" value="@(elem.Name + "." + elem.Extention)" name="fileNameExtention" />
-                                @if (elem.RelativeFolderPath != "")
-                                {<input type="hidden" value="@Context.Request.Query["relativeFolderPath"].ToString()" name="relativeFolderPath" />}
-                                <button type="submit" onclick="return confirm('Вы точно хотите удалить папку и все ее содержимое?')"><img src="~/images/remove.png"/></button>
-                            </form>
-                        </div>
-                    </div>
-                    <img src="~/images/folder.png" />
-                    <p>@elem.Name</p>
-                    
-                </div>
-            </a>
-        }
-    }
+    <div id="items">
+        @{Html.RenderPartial("~/views/AllElementsPart.cshtml");}
+    </div>
+    
 </body>
 </html>
