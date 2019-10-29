@@ -88,7 +88,7 @@ using DocsFileManagerMVC.Models;
             WriteLiteral("\">\r\n            ");
             EndContext();
             BeginContext(563, 31, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "68e591586dcb445ba56666ff6c097e05", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "04eb2c2fa37d4ebe84e5bda1a8c4fd10", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -220,7 +220,7 @@ WriteAttributeValue("", 1962, string.Format("{0}://{1}{2}", Context.Request.Sche
             WriteLiteral(">\r\n                        ");
             EndContext();
             BeginContext(2230, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9046d1ac063f483da6f78c0d13475d5d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "46714030a85343f3a31cdea64f304bf1", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -238,7 +238,7 @@ WriteAttributeValue("", 1962, string.Format("{0}://{1}{2}", Context.Request.Sche
             WriteLiteral("\r\n                    </a>\r\n                </div>\r\n                <div class=\"icons\">\r\n                    ");
             EndContext();
             BeginContext(2374, 654, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "81eeaeb555f6499faf33c3b649e3ad93", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a7d8fde97c3045ae933cbfa08fc7df15", async() => {
                 BeginContext(2509, 46, true);
                 WriteLiteral("\r\n                        <input type=\"hidden\"");
                 EndContext();
@@ -280,7 +280,7 @@ WriteAttributeValue("", 2743, Uri.EscapeDataString(Context.Request.Query["relati
                 WriteLiteral("                        <button type=\"submit\" onclick=\"return confirm(\'Вы точно хотите удалить файл?\')\">");
                 EndContext();
                 BeginContext(2957, 33, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "01469fd6000f44a297ae76a907b25083", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ec0a4bab41884132a668578740af3756", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -324,7 +324,7 @@ WriteAttributeValue("", 2743, Uri.EscapeDataString(Context.Request.Query["relati
             WriteLiteral("\r\n                </div>\r\n            </div>\r\n            ");
             EndContext();
             BeginContext(3086, 49, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "8a73315c4ca042aba847029b0099b1f0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "718c8f0f515240d2b4b20e05f7361101", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -392,7 +392,7 @@ AddHtmlAttributeValue("", 3105, elem.Extention + ".png", 3105, 26, false);
             WriteLiteral("</p>\r\n                    <div class=\"icons\">\r\n                        ");
             EndContext();
             BeginContext(4048, 708, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "08c67a75f1b34d6d97113bb3284325e7", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0b3ab15b408941e791e3fa17fecae892", async() => {
                 BeginContext(4217, 50, true);
                 WriteLiteral("\r\n                            <input type=\"hidden\"");
                 EndContext();
@@ -434,7 +434,7 @@ WriteAttributeValue("", 4463, Uri.EscapeDataString(Context.Request.Query["relati
                 WriteLiteral("                            <button type=\"submit\" onclick=\"return confirm(\'Вы точно хотите удалить файл?\')\">");
                 EndContext();
                 BeginContext(4681, 33, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "c09ea78f6370438599cd5143e6b9363c", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "313693299d6f45328899cded0b9927a6", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -479,7 +479,7 @@ WriteAttributeValue("", 4463, Uri.EscapeDataString(Context.Request.Query["relati
             WriteLiteral("\r\n                    </div>\r\n                </div>\r\n                ");
             EndContext();
             BeginContext(4826, 33, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "1dcbb0ab542f485b897af25205e4ccff", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "c6db1c356b784928a01e8e995ad8e530", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

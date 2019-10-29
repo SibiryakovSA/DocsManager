@@ -17,14 +17,6 @@ C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.TagHelpers.output.cache
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.RazorCoreGenerate.cache
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Default\Default.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Home\About.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Home\Contact.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Shared\Error.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Shared\_Layout.cshtml.g.cs
-C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.RazorTargetAssemblyInfo.cache
@@ -33,3 +25,6 @@ C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.dll
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.pdb
 C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\DocsFileManagerMVC.csproj.CopyComplete
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Release\netcoreapp2.1\libman.json
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\bin\Release\netcoreapp2.1\package.json
+C:\Users\User\source\repos\DocsManager\DocsFileManagerMVC\obj\Release\netcoreapp2.1\Razor\Views\AllElementsPart.cshtml.g.cs

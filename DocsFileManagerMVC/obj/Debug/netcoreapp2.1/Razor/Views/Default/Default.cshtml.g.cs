@@ -75,12 +75,12 @@ using DocsFileManagerMVC.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(78, 425, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "186457278ab3472aa8df8671570daaf0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e4fdc60b0be94ae5aa559dec8bd9137c", async() => {
                 BeginContext(84, 134, true);
                 WriteLiteral("\r\n    <meta charset=\"utf-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Хранилище документов</title>\r\n    ");
                 EndContext();
                 BeginContext(218, 48, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "62fd08ddf3dd4104b862a06c0acb1fe9", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("link", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "24c59c0bfc61496db60eec73e0c4880e", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -99,7 +99,7 @@ using DocsFileManagerMVC.Models;
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(272, 46, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4554e42029a4f789823964f6f0a5dde", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "130b584fd4e1478e8a3936fed7fd3517", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -117,7 +117,7 @@ using DocsFileManagerMVC.Models;
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(324, 85, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a60e463f86740beb23a4be97e569612", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c025da8238ab4fc4a1f0ecffdc2582f4", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -150,12 +150,12 @@ using DocsFileManagerMVC.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(505, 1653, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4e13e824b314dcd973f8fa13b31efd5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cd79a36cf38444b588da9167e066b7e6", async() => {
                 BeginContext(511, 166, true);
                 WriteLiteral("\r\n    <header>\r\n        <h1>Файловое хранилище имени меня</h1>\r\n    </header>\r\n    <div class=\"inputWithDescr\" id=\"first\">\r\n        <h3>Загрузка файлов</h3>\r\n        ");
                 EndContext();
                 BeginContext(677, 580, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6de79fb4e9c34245b6d964e38f9adfef", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "664293e4691d47399e6dbde295f1befe", async() => {
                     BeginContext(843, 34, true);
                     WriteLiteral("\r\n            <input type=\"hidden\"");
                     EndContext();
@@ -203,7 +203,7 @@ WriteAttributeValue("", 885, Uri.EscapeDataString(Context.Request.Query["relativ
                 WriteLiteral("\r\n    </div>\r\n    <div class=\"inputWithDescr\" id=\"second\">\r\n        <h3>Создание папок</h3>\r\n        ");
                 EndContext();
                 BeginContext(1358, 673, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4c0c45fc5994f958ec679cc9828655d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7b43b2468b124115812a8f29460b31ed", async() => {
                     BeginContext(1525, 2, true);
                     WriteLiteral("\r\n");
                     EndContext();
